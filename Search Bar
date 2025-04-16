@@ -1,0 +1,121 @@
+<html><head><base target="_blank">
+
+
+    <base target="_blank">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&amp;display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            background: transparent;
+            overflow: hidden;
+        }
+
+        .search-container {
+            position: relative;
+            width: 50vw;
+            min-width: 400px;
+            max-width: 600px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 2px solid transparent;
+            border-radius: 30px;
+            outline: none;
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0, 150, 255, 0.3);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .search-box:focus {
+            border-color: transparent;
+            box-shadow: 0px 0px 12px rgba(0, 150, 255, 0.5);
+            transition: all 0.5s ease-in-out;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .search-icon:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .placeholder-text {
+            position: absolute;
+            top: 50%;
+            left: 16px;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: gray;
+            pointer-events: none;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .search-box:focus + .placeholder-text,
+        .search-box:not(:placeholder-shown) + .placeholder-text {
+            display: none;
+        }
+
+        @media (max-width: 500px) {
+            .search-container {
+                width: 90vw;
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <input type="text" id="search-box" class="search-box" placeholder="">
+        <span class="placeholder-text" id="animated-placeholder" style="opacity: 1;">Search our Library</span>
+        <img src="https://cdn-icons-png.flaticon.com/512/482/482631.png" class="search-icon" onclick="submitSearch()" alt="Search">
+    </div>
+
+    <script>
+        const placeholderTexts = [
+            "Search our Library",
+            "Search for Over 1,000 Games"
+        ];
+        let index = 0;
+        const placeholderElement = document.getElementById("animated-placeholder");
+
+        function changePlaceholder() {
+            placeholderElement.style.opacity = 0; // Fade out
+            setTimeout(() => {
+                placeholderElement.textContent = placeholderTexts[index];
+                placeholderElement.style.opacity = 1; // Fade in
+                index = (index + 1) % placeholderTexts.length;
+            }, 500);
+        }
+
+        setInterval(changePlaceholder, 3000);
+
+        function submitSearch() {
+            var query = document.getElementById("search-box").value;
+            if (query.trim() !== "") {
+                var siteSearchUrl = 'https://sites.google.com/search/classroommanagement6x?query=' + encodeURIComponent(query);
+                window.open(siteSearchUrl, '_blank');
+            }
+        }
+    </script>
+
+
+
+</body></html>
